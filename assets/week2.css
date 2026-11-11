@@ -28,7 +28,7 @@ h1 { font-size: clamp(2.25rem, 4.6vw, 3.5rem); letter-spacing: -.046em; }
 h2 { font-size: 2rem; letter-spacing: -.035em; }
 h3 { font-size: 1.125rem; letter-spacing: -.013em; }
 h4 { font-size: 1rem; }
-h1, h2, h3, h4, p, li, td, th, dd, a { overflow-wrap: anywhere; }
+h1, h2, h3, h4, p, li, td, th, dd, a, summary { overflow-wrap: anywhere; }
 p { max-inline-size: 70ch; }
 p + p, h3 + p, h4 + p { margin-block-start: .65rem; }
 ul, ol { margin: .75rem 0 0; padding-inline-start: 1.4rem; }
@@ -151,12 +151,17 @@ a:hover { color: var(--ink); text-decoration-thickness: .12em; }
 .role-grid > :is(ul, ol, p) { margin-block: 0; }
 .role-choice { display: grid; gap: 1rem; border-block-end: 1px solid var(--line); }
 .role-choice .role-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
-.role-choice a { grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: .75rem; padding: 1.25rem 1.5rem; text-decoration: none; }
-.role-choice a:hover { outline: 1px solid currentColor; text-decoration: underline; }
+.role-choice a { grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: .75rem; padding: 1.25rem 1.5rem; text-decoration: none; }
+.role-choice a:hover { outline: 1px solid currentColor; }
 .role-choice :is(strong, h3) { font-size: 1.1rem; }
+.card-action { display: block; margin-block-start: .7rem; color: var(--link); text-decoration: underline; text-underline-offset: .2em; }
 .workload { padding: .8rem 1rem; border: 1px solid var(--role-line); border-inline-start-width: .3rem; border-radius: .5rem; }
+.workload .copy-group + .copy-group { margin-block-start: .75rem; }
 .workload > .inventory { margin-block-start: .65rem; }
 .workload > .inventory > :last-child { background: var(--neutral); border-color: var(--line); }
+.assignment-flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .45rem; margin-block-start: .85rem; padding: 0; list-style: none; }
+.assignment-flow li { margin: 0; padding: .45rem .65rem; border-inline-start: 2px solid var(--role-line); background: var(--neutral); font-size: .9rem; }
+.flow-note { margin-block-start: .45rem; color: var(--muted); font-size: .9rem; }
 .role-steps, .role-criteria, .return-steps { display: grid; gap: 1rem; }
 .role-criteria > .status { padding: .6rem .75rem; border: 1px solid var(--line); border-radius: .5rem; background: var(--neutral); }
 .return-grid { gap: 1.35rem; }
@@ -233,11 +238,12 @@ summary:hover { text-decoration: underline; text-underline-offset: .2em; }
   .reading-path { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .workspace-grid { padding-block: 1.75rem 2.5rem; }
   .lesson { padding-block: 2.5rem; }
-  .panels, .role-grid, .role-choice .role-grid, .formula, .resource-row, .scenario-list { grid-template-columns: minmax(0, 1fr); }
+  .panels, .role-grid, .role-choice .role-grid, .formula, .resource-row, .scenario-list, .assignment-flow { grid-template-columns: minmax(0, 1fr); }
   .formula > :not(h3) { grid-column: 1; }
   .panel, .role .section-heading, .role-choice a { padding: 1.05rem 1.25rem; }
   .resource-row { gap: .35rem; }
   .inventory { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .workload > .inventory { grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr)); }
   .table-wrap:has([data-label]) table { display: block; }
   .table-wrap:has([data-label]) thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .table-wrap:has([data-label]) :is(tbody, tfoot) { display: grid; gap: .65rem; }
@@ -281,6 +287,6 @@ summary:hover { text-decoration: underline; text-underline-offset: .2em; }
   table { font-size: 9pt; }
   .table-wrap .cell-label { display: none; }
   thead { display: table-header-group; }
-  tr, .notice, .metric { break-inside: avoid; }
+  tr, .notice, .metric, .assignment-flow li { break-inside: avoid; }
   td, th { padding: .35rem .45rem; }
 }
